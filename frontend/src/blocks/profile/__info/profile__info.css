@@ -1,0 +1,20 @@
+.profile__info {
+  margin: 0 244px 0 30px;
+  display: grid;
+  grid-template-areas:
+    "name edit-button"
+    "status none";
+  row-gap: 16px;
+  column-gap: 18px;
+}
+
+@media screen and (max-width: 879px) {
+  .profile__info {
+    margin: 26px 19px 36px;
+    grid-template-areas:
+      "name edit-button"
+      "status status";
+    row-gap: 14px;
+    column-gap: 10px;
+  }
+}

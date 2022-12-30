@@ -1,0 +1,18 @@
+.authorized-form {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: -105px;
+  right: 0;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+@media screen and (max-width: 600px) {
+  .authorized-form {
+    top: -89px;
+    right: 30px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

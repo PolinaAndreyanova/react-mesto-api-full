@@ -1,0 +1,28 @@
+.unauthorized-form__header-button {
+  position: absolute;
+  top: -128px;
+  right: 0;
+  color: #ffffff;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  opacity: 1;
+  transition: opacity 0.5s;
+  text-decoration: none;
+}
+
+.unauthorized-form__header-button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 600px) {
+  .unauthorized-form__header-button {
+    top: -90px;
+    right: 30px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

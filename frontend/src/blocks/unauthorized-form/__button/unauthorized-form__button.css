@@ -1,0 +1,26 @@
+.unauthorized-form__button {
+  margin: 15px auto 0;
+  width: 358px;
+  height: 17px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  opacity: 1;
+  transition: opacity 0.5s;
+  text-decoration: none;
+}
+
+.unauthorized-form__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 600px) {
+  .unauthorized-form__button {
+    margin: 20px auto 0;
+    width: 260px;
+  }
+}
