@@ -10,6 +10,7 @@ const cardRouter = require('./routes/card');
 const { login, createUser } = require('./controllers/user');
 
 const { checkAuth } = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const NotFoundError = require('./errors/not-found-error');
 
@@ -19,17 +20,6 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-
-//   next();
-// });
-
-// Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
   'http://localhost:3000',
 ];
@@ -57,6 +47,8 @@ app.use((req, res, next) => {
   return next();
 });
 
+app.use(requestLogger);
+
 app.use('/users', checkAuth, userRouter);
 
 app.use('/cards', checkAuth, cardRouter);
@@ -81,6 +73,8 @@ app.post('/signup', celebrate({
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Путь не найден'));
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 
