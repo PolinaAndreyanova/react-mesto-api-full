@@ -103,7 +103,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'http://api.mesto.polina.students.nomoredomains.club',
   // headers: {
   //   // authorization: '07cf89e3-4dde-4a9f-9c59-e93fe0d43902',
   //   'Content-Type': 'application/json'
