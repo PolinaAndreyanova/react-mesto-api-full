@@ -1,12 +1,14 @@
 const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('../errors/unauthorized-error');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const checkToken = (token) => {
   if (!token) {
     return false;
   }
 
-  if (!jwt.verify(token, 'secret-token-key')) {
+  if (!jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret')) {
     return false;
   }
 
