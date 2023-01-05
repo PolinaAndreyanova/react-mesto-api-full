@@ -21,7 +21,15 @@ const createCard = (req, res, next) => {
   const { _id } = req.user;
 
   Card.create({ name, link, owner: _id })
-    .then((card) => res.status(SUCCESS_CREATED_CODE).send(card))
+    .then((card) => {
+      Card.findById(card._id)
+        .populate(['owner', 'likes'])
+        .then((newCard) => res.status(SUCCESS_CREATED_CODE).send(newCard))
+        .catch(() => {
+          next(new InternalServerError('Произошла ошибка'));
+        });
+      // res.status(SUCCESS_CREATED_CODE).send(card);
+    })
     .catch((error) => {
       if (error.name === 'ValidationError') {
         return next(new BadRequestError('Переданы некорректные данные'));
