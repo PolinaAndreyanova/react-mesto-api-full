@@ -1,4 +1,4 @@
-const baseUrl = "http://api.mesto.polina.students.nomoredomains.club";
+const baseUrl = "https://api.mesto.polina.students.nomoredomains.club";
 
 const checkResponse = (res) => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 
