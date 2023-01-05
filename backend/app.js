@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 const allowedCors = [
   'http://localhost:3000',
   'http://mesto.polina.students.nomoredomains.club',
+  'https://mesto.polina.students.nomoredomains.club',
 ];
 
 app.use((req, res, next) => {
