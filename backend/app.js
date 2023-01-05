@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 // const path = require('path');
@@ -22,34 +23,36 @@ const app = express();
 
 app.use(bodyParser.json());
 
-const allowedCors = [
-  'http://localhost:3000',
-  'http://mesto.polina.students.nomoredomains.club',
-  'https://mesto.polina.students.nomoredomains.club',
-];
+app.use(cors());
 
-app.use((req, res, next) => {
-  const { origin } = req.headers;
+// const allowedCors = [
+//   'http://localhost:3000',
+//   'http://mesto.polina.students.nomoredomains.club',
+//   'https://mesto.polina.students.nomoredomains.club',
+// ];
 
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
+// app.use((req, res, next) => {
+//   const { origin } = req.headers;
 
-  const { method } = req;
+//   if (allowedCors.includes(origin)) {
+//     res.header('Access-Control-Allow-Origin', origin);
+//   }
 
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+//   const { method } = req;
 
-  const requestHeaders = req.headers['access-control-request-headers'];
+//   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
+//   const requestHeaders = req.headers['access-control-request-headers'];
 
-    return res.end();
-  }
+//   if (method === 'OPTIONS') {
+//     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+//     res.header('Access-Control-Allow-Headers', requestHeaders);
 
-  return next();
-});
+//     return res.end();
+//   }
+
+//   return next();
+// });
 
 app.use(requestLogger);
 
