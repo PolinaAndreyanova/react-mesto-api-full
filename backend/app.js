@@ -1,11 +1,9 @@
-// require('dotenv').config();
+require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-// const cors = require('cors');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
-// const path = require('path');
 
 const userRouter = require('./routes/user');
 const cardRouter = require('./routes/card');
@@ -22,8 +20,6 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(bodyParser.json());
-
-// app.use(cors());
 
 const allowedCors = [
   'http://localhost:3000',
