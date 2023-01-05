@@ -11,7 +11,9 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => /^(http|https):\/\/(www. |)([\w|-]+)\.([A-z]{2,})/.test(v),
+      validator(v) {
+        return /^(http|https):\/\/(www. |)([\w|-]+)\.([A-z]{2,})/.test(v);
+      },
       message: (props) => `${props.value} is not a valid link!`,
     },
   },
