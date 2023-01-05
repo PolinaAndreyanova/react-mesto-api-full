@@ -148,21 +148,21 @@ const login = (req, res, next) => {
     .then((user) => {
       if (user === null) {
         next(new UnauthorizedError('Неправильные почта или пароль'));
+      } else {
+        bcrypt.compare(password, user.password)
+          .then((matched) => {
+            if (!matched) {
+              return next(new UnauthorizedError('Неправильные почта или пароль'));
+            }
+
+            const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+
+            return res.status(SUCCESS_OK_CODE).send({ jwt: token });
+          })
+          .catch(() => {
+            next(new InternalServerError('Произошла ошибка'));
+          });
       }
-
-      bcrypt.compare(password, user.password)
-        .then((matched) => {
-          if (!matched) {
-            return next(new UnauthorizedError('Неправильные почта или пароль'));
-          }
-
-          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
-
-          return res.status(SUCCESS_OK_CODE).send({ jwt: token });
-        })
-        .catch(() => {
-          next(new InternalServerError('Произошла ошибка'));
-        });
     })
     .catch(() => {
       next(new InternalServerError('Произошла ошибка'));

@@ -38,17 +38,15 @@ const deleteCard = (req, res, next) => {
     .then((card) => {
       if (card === null) {
         next(new NotFoundError('Карточка не найдена'));
-      }
-
-      if (card.owner._id.toString() !== req.user._id) {
+      } else if (card.owner._id.toString() !== req.user._id) {
         next(new ForbiddenError('Доступ запрещён'));
+      } else {
+        Card.findByIdAndRemove(_id)
+          .populate(['owner', 'likes'])
+          .then(() => {
+            res.status(SUCCESS_OK_CODE).send(card);
+          });
       }
-
-      Card.findByIdAndRemove(_id)
-        .populate(['owner', 'likes'])
-        .then(() => {
-          res.status(SUCCESS_OK_CODE).send(card);
-        });
     })
     .catch((error) => {
       if (error.name === 'CastError') {

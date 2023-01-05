@@ -79,7 +79,7 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
-app.use('*', (req, res, next) => {
+app.use('*', checkAuth, (req, res, next) => {
   next(new NotFoundError('Путь не найден'));
 });
 
